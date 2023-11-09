@@ -1,0 +1,306 @@
+
+<FileChooserScreen>:
+    name: "file"
+
+    AnchorLayout:
+        anchor_x: "left"
+        anchor_y: "top"
+        MyButton:
+            size_hint: (0.15, 0.15)
+            on_release:
+                app.root.current = "about"
+                root.manager.transition.direction = 'right'
+    GridLayout:
+        cols: 1
+        rows: 2
+        Screen:
+            Label:
+                text: "By Using Our App\nYou Agree With\nOur Terms and Conditions.\nRead Them in About App"
+                size_hint: (1, .2)
+                pos_hint: {"y": .65}
+            Button:
+                pos_hint: {"y": .55, "x": .3}
+                text: "Choose File"
+                size_hint: (.4, .1)
+                on_release:
+                    root.file()
+            Button:
+                pos_hint: {"y": .45, "x": .3}
+                text: "About App"
+                size_hint: (.4, .1)
+                on_release:
+                    app.root.current = "app"
+                    root.manager.transition.direction = 'down'
+
+<AboutScreen>:
+    name: "about"
+
+    AnchorLayout:
+        anchor_x: "left"
+        anchor_y: "top"
+        MyButton:
+            size_hint: (0.15, 0.15)
+            on_release:
+                app.root.current = "file"
+                root.manager.transition.direction = 'left'
+    GridLayout:
+        cols: 1
+        rows: 2
+        Screen:
+            Button:
+                pos_hint: {"y": .6, "x": .3}
+                text: "Creator"
+                size_hint: (.4, .1)
+                on_release:
+                    app.root.current = "me"
+                    root.manager.transition.direction = 'down'
+            Button:
+                pos_hint: {"y": .4, "x": .3}
+                text: "About App"
+                size_hint: (.4, .1)
+                on_release:
+                    app.root.current = "app"
+                    root.manager.transition.direction = 'down'
+<TempScreen>:
+    name: "temp"
+    label: label
+
+    GridLayout:
+        cols:1
+        rows: 2
+        RstDocument:
+            id: label
+            size_hint: (1, .8)
+        Button:
+            text: "Back"
+            size_hint: (.1, .1)
+            pos_hint: {"x": .3}
+            on_release:
+                root.sub()
+
+<AboutApp>:
+    name: "app"
+    GridLayout:
+        cols: 1
+        rows: 4
+        Button:
+            pos_hint: {"y": .8, "x": .3}
+            text: "Privacy Policy"
+            size_hint: (.4, .1)
+            on_release:
+                root.rst_text("policy")
+        Button:
+            pos_hint: {"y": .6, "x": .3}
+            text: "Terms and Conditions"
+            size_hint: (.4, .1)
+            on_release:
+                root.rst_text("terms")
+        Button:
+            pos_hint: {"y": .4, "x": .3}
+            text: "App Process"
+            size_hint: (.4, .1)
+            on_release:
+                root.rst_text("process")
+        Button:
+            pos_hint: {"y": .2, "x": .3}
+            text: "Back"
+            size_hint: (.4, .1)
+            on_release:
+                app.root.current = "file"
+                root.manager.transition.direction = 'up'
+<AboutMe>:
+    name: "me"
+
+    BoxLayout:
+        orientation: "vertical"
+        Image:
+            source: root.me
+            size_hint: (1, 0.5)
+        Label:
+            size_hint: (1, 0.1)
+            text: "My Name Is Insan.\nI'm the Creator Of This App."
+        GridLayout:
+            size_hint: (0.6, 0.4)
+            pos_hint: {"x":.2}
+            rows: 5
+            cols:1
+            GridLayout:
+                cols: 2
+                Image:
+                    source: root.blogger_img
+                    size_hint: (.4,1)
+                Button:
+                    text: "View"
+                    size_hint: (.6,1)
+                    on_release:
+                        root.social_media = "blogger"
+                        root.socialmedia()
+            GridLayout:
+                cols: 2
+                Image:
+                    source: root.fb_img
+                    size_hint: (.4,1)
+                Button:
+                    text: "Join"
+                    size_hint: (.6,1)
+                    on_release:
+                        root.social_media = "facebook"
+                        root.socialmedia()
+            GridLayout:
+                cols: 2
+                Image:
+                    source: root.youtube_img
+                    size_hint: (.4,1)
+                Button:
+                    text: "Subscribe"
+                    size_hint: (.6,1)
+                    on_release:
+                        root.social_media = "youtube"
+                        root.socialmedia()
+            GridLayout:
+                cols: 2
+                Image:
+                    source: root.paypal_img
+                    size_hint: (.4,1)
+                Button:
+                    text: "Donate"
+                    size_hint: (.6,1)
+                    on_release:
+                        root.social_media = "paypal"
+                        root.socialmedia()
+            Button:
+                text: "Go Back"
+                size_hint: (1,1)
+                on_release:
+                    app.root.current = "about"
+                    root.manager.transition.direction = 'up'
+
+<PasswordScreen>:
+    name: "password"
+    label : label
+    btn: btn
+    FloatLayout:
+        AnchorLayout:
+            anchor_x: "left"
+            anchor_y: "top"
+            MyButton:
+                size_hint: (0.15, 0.15)
+                pos_hint: {"y": .85}
+                on_release:
+                    app.root.current = "file"
+                    root.manager.transition.direction = 'right'
+        GridLayout:
+            rows: 1
+            cols: 1
+            size_hint: (0.6, 0.3)
+            pos_hint: {"y": .7, "x":.2}
+            Label:
+                id: label
+        TextInput:
+            id: password
+            size_hint: (0.6, 0.06)
+            pos_hint: {"y": .5, "x":.2}
+            multiline: False
+        Button:
+            id: btn
+            size_hint: (0.25, 0.1)
+            pos_hint: {"y": .2, "x":.37}
+            on_release:
+                root.function(password.text)
+
+<ErrorScreen>:
+    name: "error"
+
+    RstDocument:
+        text: root.label_text
+        color: (1,0,0,1)
+        pos_hint: {"y":.85}
+        size_hint: (1,.1)
+    Image:
+        source: root.error_img
+        size_hint: (.6,.5)
+        pos_hint: {"y": .3, "x": .2}
+    Button:
+        text: "Enter Password"
+        size_hint: (.5,.1)
+        pos_hint: {"y": .17, "x": .25}
+        on_release:
+            root.submit()
+
+<EncryptionCompleteScreen>:
+    name: "encinfo"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.size
+        pos: root.pos
+        GridLayout:
+            rows:3
+            cols:1
+            size_hint: (1, .8)
+            Label:
+                text: root.message
+                size: self.texture_size
+                color: (0,0,1,1)
+                canvas.before:
+                    Color:
+                        rgba: self.color
+            RstDocument:
+                id: show
+                text: root.reveal_password
+                pos: self.pos
+                font_size: 10
+                size: self.size
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            pos_hint: {"x": .4}
+            size_hint: (.2, .1)
+            Button:
+                text: "Show Password"
+                on_release:
+                    root.show_password()
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: (1, .2)
+            Button:
+                text: "Home"
+                size_hint: (.4, .3)
+                on_release:
+                    root.Home()
+
+<DecryptionCompleteScreen>:
+    name: "decinfo"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.size
+        pos: root.pos
+        GridLayout:
+            rows:2
+            cols:1
+            size_hint: (1, .8)
+            Label:
+                text: root.message
+                size: self.texture_size
+                color: (0,0,1,1)
+                canvas.before:
+                    Color:
+                        rgba: self.color
+            Label:
+                text: root.note
+                size: self.size
+                color: (1,0,0,1)
+                canvas.before:
+                    Color:
+                        rgba: self.color
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            size_hint: (1, .2)
+            Button:
+                text: "Home"
+                size_hint: (.4, .3)
+                on_release:
+                    root.Home()
